@@ -2,6 +2,8 @@
 
 A Neovim plugin that displays Git blame information for the current line in a floating window.
 
+![Git blame in a floating window in Neovim](./assets/preview.png)
+
 ## Features
 
 - Displays Git blame information in a floating window.
@@ -14,9 +16,6 @@ To install `git-blame.nvim`, you can use your preferred plugin manager. For exam
 ```lua
 return {
     "steschwa/git-blame.nvim",
-    keys = {
-        { "gb", "<cmd>GitBlameLine<cr>" }
-    },
     opts = {
         -- see below for the full configuration reference
         lines = {}
@@ -94,11 +93,9 @@ return {
 > This plugin does not define any highlight groups by itself.
 > Make sure you create them on demand.
 
-This produces an output like the following:
+This produces the output of the above screenshot.
 
-![Git blame in a floating window in Neovim](./assets/preview.png)
-
-You can customize the output further by adding more lines or provider functions as needed, allowing for a flexible and tailored display of blame information.
+You can customize the output further by adding more rows or provider functions as needed, allowing for a flexible and tailored display of blame information.
 
 ## Usage
 

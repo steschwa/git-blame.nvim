@@ -78,6 +78,9 @@ end
 
 return {
     "steschwa/git-blame.nvim",
+    keys = {
+        { "gb", "<cmd>GitBlameLine<cr>" }
+    },
     opts = {
         lines = {
             { provider_sha, provider_time},

@@ -12,3 +12,8 @@ VERSION=$(git cliff --bumped-version)
 git add CHANGELOG.md
 git commit -m "chore(release): prepare for $VERSION"
 git tag $VERSION
+
+REMOTE=$(git remote)
+
+git push $REMOTE main
+git push $REMOTE $VERSION

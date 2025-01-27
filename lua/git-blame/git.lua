@@ -29,6 +29,9 @@ local function parse_blame_output(output)
 	---@see https://git-scm.com/docs/git-blame#_incremental_output
 
 	local sha = lines[1]:match("^(%x+)")
+	if not sha then
+		return
+	end
 	if #sha ~= 40 then
 		return
 	end

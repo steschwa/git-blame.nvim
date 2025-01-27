@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2] - 2025-01-27
+
+### ⚙️ Miscellaneous Tasks
+
+- Release script
+- Justfile
+- Push after commit+tag
+
 ## [0.1.1] - 2025-01-27
 
 ### ⚙️ Miscellaneous Tasks

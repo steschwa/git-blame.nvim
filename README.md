@@ -75,8 +75,9 @@ Here is an example of how to configure the plugin with custom provider functions
 
 ```lua
 local provider_sha = function(blame)
+    local formatted_sha = blame.sha:sub(1, 10)
     -- reuse highlight groups (e.g. Comment)
-    return { text = blame.sha:sub(1, 10), hl = "Comment" }
+    return { text = string.format("%s  "), hl = "Comment" }
 end
 
 local provider_time = function(blame)
@@ -109,6 +110,8 @@ return {
 }
 ```
 
+This produces the output of the above screenshot.
+
 > [!NOTE]  
 > This plugin does not define any highlight groups by itself.  
 > Make sure you create them on demand:
@@ -116,8 +119,6 @@ return {
 > ```lua
 > vim.api.nvim_set_hl(0, "GitBlameTime", { link = "Label" })
 > ```
-
-This produces the output of the above screenshot.
 
 You can customize the output further by adding more rows or provider functions as needed, allowing for a flexible and tailored display of blame information.
 

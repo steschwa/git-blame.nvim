@@ -18,7 +18,6 @@ return {
     "steschwa/git-blame.nvim",
     opts = {
         -- see below for the full configuration reference
-        lines = {}
     }
 }
 ```
@@ -51,6 +50,20 @@ A `git-blame.Part` is a table that contains the text to display and an optional 
     ```
 
 </details>
+
+### Default Configuration
+
+```lua
+{
+    lines = {
+        -- see "Example Configuration" below
+    },
+    window = {
+        -- used for `vim.api.nvim_open_win()`
+        border = "single"
+    }
+}
+```
 
 ### Example Configuration
 
@@ -94,7 +107,11 @@ return {
 
 > [!NOTE]  
 > This plugin does not define any highlight groups by itself.
-> Make sure you create them on demand.
+> Make sure you create them on demand:
+>
+> ```lua
+> vim.api.nvim_set_hl(0, "GitBlameTime", { link = "Label" })
+> ```
 
 This produces the output of the above screenshot.
 

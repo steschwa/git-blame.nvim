@@ -73,7 +73,7 @@ local Git = {}
 ---@param on_blame fun(blame: git-blame.BlameInfo)
 function Git.blame_current_line(on_blame)
 	local line_nr = vim.fn.line(".")
-	local filename = vim.fn.expand("%")
+	local filename = vim.fn.fnamemodify(vim.fn.expand("%"), ":p")
 
 	local args = { "git", "blame", "--incremental", string.format("-L%d,+1", line_nr), "--", filename }
 

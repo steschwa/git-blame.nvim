@@ -27,9 +27,10 @@ return {
 The plugin allows for extensive customization of how the blame output is displayed.
 You can define your own provider functions that dictate what information to show and how to format it.
 
-The configuration has a single `lines` field, which is a list of rows.
+The configuration has a `lines` field, which is a list of rows.
 Each row consists of `n` provider functions that receive a `git-blame.BlameInfo` object as their only parameter and return a `git-blame.Part`.
 A `git-blame.Part` is a table that contains the text to display and an optional highlight group.
+See [Example Configuration](#example-configuration) for a more practical explanation.
 
 <details>
 <summary>Types</summary>
@@ -54,11 +55,11 @@ A `git-blame.Part` is a table that contains the text to display and an optional 
 <details>
 <summary>Default Configuration</summary>
 
+These values are used by default if not overridden by you.
+
 ```lua
 {
-    lines = {
-        -- see "Example Configuration" below
-    },
+    lines = {},
     window = {
         -- used for `vim.api.nvim_open_win()`
         border = "single"

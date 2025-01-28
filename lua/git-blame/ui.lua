@@ -119,7 +119,7 @@ function Window:open(blame)
 		width = line_width,
 		height = #rendered_lines,
 		style = "minimal",
-		border = "single",
+		border = self.config.window.border,
 	})
 
 	vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {

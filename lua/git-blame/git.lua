@@ -7,7 +7,7 @@
 
 ---@param tag_word string
 ---@param lines string[]
----@return string?
+---@return string|nil
 local function find_by_tag_word(tag_word, lines)
 	for _, line in ipairs(lines) do
 		if vim.startswith(line, tag_word) then
@@ -18,7 +18,7 @@ local function find_by_tag_word(tag_word, lines)
 end
 
 ---@param output string
----@return git-blame.BlameInfo?
+---@return git-blame.BlameInfo|nil
 local function parse_blame_output(output)
 	local lines = vim.split(output, "\n")
 

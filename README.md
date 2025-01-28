@@ -32,22 +32,22 @@ Each row consists of `n` provider functions that receive a `git-blame.BlameInfo`
 A `git-blame.Part` is a table that contains the text to display and an optional highlight group.
 
 <details>
-    <summary>Types</summary>
+<summary>Types</summary>
 
-    ```lua
-    ---@class git-blame.BlameInfo
-    ---@field sha string
-    ---@field author string
-    ---@field author_email string
-    ---@field timestamp integer -- unix timestamp in seconds
-    ---@field message string
+```lua
+---@class git-blame.BlameInfo
+---@field sha string
+---@field author string
+---@field author_email string
+---@field timestamp integer -- unix timestamp in seconds
+---@field message string
 
-    ---@class git-blame.Part
-    ---@field text string
-    ---@field hl string?
+---@class git-blame.Part
+---@field text string
+---@field hl string?
 
-    ---@alias git-blame.Provider fun(blame: git-blame.BlameInfo): git-blame.Part
-    ```
+---@alias git-blame.Provider fun(blame: git-blame.BlameInfo): git-blame.Part
+```
 
 </details>
 
@@ -106,7 +106,7 @@ return {
 ```
 
 > [!NOTE]  
-> This plugin does not define any highlight groups by itself.
+> This plugin does not define any highlight groups by itself.  
 > Make sure you create them on demand:
 >
 > ```lua

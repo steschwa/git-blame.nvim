@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+GREEN="\x1b[32m"
+RESET="\x1b[0m"
+
 BUMP=$(git cliff --bump -o CHANGELOG.md 2>&1)
 
 if echo "$BUMP" | grep -q "There is nothing to bump."; then
@@ -7,13 +10,19 @@ if echo "$BUMP" | grep -q "There is nothing to bump."; then
     exit 1
 fi
 
+echo -e "${GREEN}updated changelog ✅${RESET}"
+
 VERSION=$(git cliff --bumped-version)
 
 git add CHANGELOG.md
 git commit -m "chore(release): prepare for $VERSION"
 git tag $VERSION
 
+echo -e "${GREEN}tagged version ✅${RESET}"
+
 REMOTE=$(git remote)
 
 git push $REMOTE main
 git push $REMOTE $VERSION
+
+echo -e "${GREEN}pushed main + tag ✅${RESET}"

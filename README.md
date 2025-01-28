@@ -51,7 +51,8 @@ A `git-blame.Part` is a table that contains the text to display and an optional 
 
 </details>
 
-### Default Configuration
+<details>
+<summary>Default Configuration</summary>
 
 ```lua
 {
@@ -64,6 +65,8 @@ A `git-blame.Part` is a table that contains the text to display and an optional 
     }
 }
 ```
+
+</details>
 
 ### Example Configuration
 

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.0] - 2025-01-28
+
+### 🚀 Features
+
+- Execute git in file cwd
+
 ## [0.2.2] - 2025-01-28
 
 ### 📚 Documentation

@@ -1,6 +1,6 @@
 local Window = require("git-blame.ui")
 local Git = require("git-blame.git")
-local TableUtils = require("utils.table")
+local TableUtils = require("git-blame.utils.table")
 
 ---@class git-blame.WinConfig
 ---@field border string|string[]|nil

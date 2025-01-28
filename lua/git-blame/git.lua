@@ -77,7 +77,13 @@ function Git.blame_current_line(on_blame)
 
 	local args = { "git", "blame", "--incremental", string.format("-L%d,+1", line_nr), "--", filename }
 
-	vim.system(args, { text = true }, function(out)
+	---@type vim.SystemOpts
+	local opts = {
+		text = true,
+		cwd = vim.fn.fnamemodify(filename, ":h"),
+	}
+
+	vim.system(args, opts, function(out)
 		if not out then
 			return
 		end

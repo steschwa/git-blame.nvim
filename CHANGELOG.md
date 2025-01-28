@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.2] - 2025-01-28
+
+### 📚 Documentation
+
+- Fix example to produce screenshot
+
+### ⚙️ Miscellaneous Tasks
+
+- Create LICENSE
+- Print release progress
+
 ## [0.2.1] - 2025-01-28
 
 ### 🐛 Bug Fixes

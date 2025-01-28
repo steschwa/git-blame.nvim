@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.1] - 2025-01-28
+
+### 🐛 Bug Fixes
+
+- Use absolute path
+
 ## [0.3.0] - 2025-01-28
 
 ### 🚀 Features

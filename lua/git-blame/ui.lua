@@ -25,7 +25,10 @@ end
 ---@field config git-blame.Config
 ---@field win integer
 ---@field buf integer
-local Window = {}
+local Window = {
+	win = -1,
+	buf = -1,
+}
 
 local WIN_AUGROUP = vim.api.nvim_create_augroup("git-blame.window", {
 	clear = true,
@@ -36,8 +39,6 @@ local WIN_AUGROUP = vim.api.nvim_create_augroup("git-blame.window", {
 function Window:new(config)
 	local o = {
 		config = config,
-		win = -1,
-		buf = -1,
 	}
 
 	return setmetatable(o, { __index = Window })
@@ -87,28 +88,24 @@ function Window:open(blame)
 	local line_width = 0
 	for row, line in ipairs(rendered_lines) do
 		local line_text = ""
-		for i, part in ipairs(line) do
+		for _, part in ipairs(line) do
 			line_text = line_text .. part.text
-
-			if i ~= #line then
-				line_text = line_text .. self.config.provider_separator
-			end
 		end
 
 		vim.api.nvim_buf_set_lines(self.buf, row - 1, row, false, { line_text })
 
 		local col_start = 0
 		for _, part in ipairs(line) do
-			local col_end = col_start + vim.api.nvim_strwidth(part.text)
+			local col_end = col_start + #part.text
 
 			if part.hl then
 				vim.api.nvim_buf_add_highlight(self.buf, -1, part.hl, row - 1, col_start, col_end)
 			end
 
-			col_start = col_end + vim.api.nvim_strwidth(self.config.provider_separator)
+			col_start = col_end
 		end
 
-		line_width = math.max(line_width, vim.api.nvim_strwidth(line_text))
+		line_width = math.max(line_width, #line_text)
 	end
 
 	vim.bo[self.buf].modifiable = false

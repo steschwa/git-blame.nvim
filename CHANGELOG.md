@@ -2,22 +2,6 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.1] - 2025-02-04
-
-### 🐛 Bug Fixes
-
-- Use separator to calculate highlight range
-
-## [1.0.0] - 2025-02-04
-
-### 🚀 Features
-
-- [**breaking**] Configure provider separator
-
-### 📚 Documentation
-
-- Reflect config changes
-
 ## [0.3.1] - 2025-01-28
 
 ### 🐛 Bug Fixes

@@ -63,8 +63,7 @@ These values are used by default if not overridden by you.
     window = {
         -- used for `vim.api.nvim_open_win()`
         border = "single"
-    },
-    provider_separator = " ",
+    }
 }
 ```
 
@@ -78,7 +77,7 @@ Here is an example of how to configure the plugin with custom provider functions
 local provider_sha = function(blame)
     local formatted_sha = blame.sha:sub(1, 10)
     -- reuse highlight groups (e.g. Comment)
-    return { text = formatted_sha, hl = "Comment" }
+    return { text = string.format("%s  "), hl = "Comment" }
 end
 
 local provider_time = function(blame)
@@ -106,8 +105,7 @@ return {
             { provider_author },
             {}, -- empty line
             { provider_message },
-        },
-        provider_separator = "  " -- two spaces
+        }
     }
 }
 ```

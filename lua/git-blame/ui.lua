@@ -99,16 +99,16 @@ function Window:open(blame)
 
 		local col_start = 0
 		for _, part in ipairs(line) do
-			local col_end = col_start + #part.text
+			local col_end = col_start + vim.api.nvim_strwidth(part.text)
 
 			if part.hl then
 				vim.api.nvim_buf_add_highlight(self.buf, -1, part.hl, row - 1, col_start, col_end)
 			end
 
-			col_start = col_end
+			col_start = col_end + vim.api.nvim_strwidth(self.config.provider_separator)
 		end
 
-		line_width = math.max(line_width, #line_text)
+		line_width = math.max(line_width, vim.api.nvim_strwidth(line_text))
 	end
 
 	vim.bo[self.buf].modifiable = false

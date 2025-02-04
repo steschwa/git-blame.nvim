@@ -25,10 +25,7 @@ end
 ---@field config git-blame.Config
 ---@field win integer
 ---@field buf integer
-local Window = {
-	win = -1,
-	buf = -1,
-}
+local Window = {}
 
 local WIN_AUGROUP = vim.api.nvim_create_augroup("git-blame.window", {
 	clear = true,
@@ -39,6 +36,8 @@ local WIN_AUGROUP = vim.api.nvim_create_augroup("git-blame.window", {
 function Window:new(config)
 	local o = {
 		config = config,
+		win = -1,
+		buf = -1,
 	}
 
 	return setmetatable(o, { __index = Window })
@@ -88,8 +87,12 @@ function Window:open(blame)
 	local line_width = 0
 	for row, line in ipairs(rendered_lines) do
 		local line_text = ""
-		for _, part in ipairs(line) do
+		for i, part in ipairs(line) do
 			line_text = line_text .. part.text
+
+			if i ~= #line then
+				line_text = line_text .. self.config.provider_separator
+			end
 		end
 
 		vim.api.nvim_buf_set_lines(self.buf, row - 1, row, false, { line_text })

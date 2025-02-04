@@ -8,6 +8,7 @@ local TableUtils = require("git-blame.utils.table")
 ---@class git-blame.Config
 ---@field lines git-blame.Provider[][]
 ---@field window git-blame.WinConfig
+---@field provider_separator string
 
 ---@class git-blame.Instance
 ---@field config git-blame.Config
@@ -25,6 +26,7 @@ function M.create_config(opts)
 		window = {
 			border = "single",
 		},
+		provider_separator = opts.provider_separator or " ",
 	}
 
 	if TableUtils.has_key(opts.window or {}, "border") then

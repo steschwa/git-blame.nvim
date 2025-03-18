@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.3] - 2025-03-18
+
+### ⚙️ Miscellaneous Tasks
+
+- Prefix releases with v
+
 ## [1.0.2] - 2025-02-04
 
 ### 🐛 Bug Fixes

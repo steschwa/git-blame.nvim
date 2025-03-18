@@ -28,7 +28,7 @@ The plugin allows for extensive customization of how the blame output is display
 You can define your own provider functions that dictate what information to show and how to format it.
 
 The configuration has a `lines` field, which is a list of rows.
-Each row consists of `n` provider functions that receive a `git-blame.BlameInfo` object as their only parameter and return a `git-blame.Part`.
+Each row consists of `n` provider functions (of type `git-blame.Provider`) that receive a `git-blame.BlameInfo` object as their only parameter and return a `git-blame.Part`.
 A `git-blame.Part` is a table that contains the text to display and an optional highlight group.
 See [Example Configuration](#example-configuration) for a more practical explanation.
 
@@ -36,6 +36,8 @@ See [Example Configuration](#example-configuration) for a more practical explana
 <summary>Types</summary>
 
 ```lua
+---@alias git-blame.Provider fun(blame: git-blame.BlameInfo): git-blame.Part
+
 ---@class git-blame.BlameInfo
 ---@field sha string
 ---@field author string
@@ -46,8 +48,6 @@ See [Example Configuration](#example-configuration) for a more practical explana
 ---@class git-blame.Part
 ---@field text string
 ---@field hl string?
-
----@alias git-blame.Provider fun(blame: git-blame.BlameInfo): git-blame.Part
 ```
 
 </details>

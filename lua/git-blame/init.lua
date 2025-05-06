@@ -23,7 +23,7 @@ function M.create_config(opts)
 	local config = {
 		lines = opts.lines or {},
 		window = {
-			border = "single",
+			border = vim.o.winborder,
 		},
 	}
 

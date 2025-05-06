@@ -55,6 +55,7 @@ function Window:close()
 
 	local buf_valid = vim.api.nvim_buf_is_valid(self.buf)
 	if buf_valid then
+		vim.api.nvim_buf_clear_namespace(self.buf, WIN_NS, 0, -1)
 		vim.api.nvim_buf_delete(self.buf, { force = true })
 		self.buf = -1
 	end
@@ -62,7 +63,6 @@ function Window:close()
 	vim.api.nvim_clear_autocmds({
 		group = WIN_AUGROUP,
 	})
-	vim.api.nvim_buf_clear_namespace(self.buf, WIN_NS, 0, -1)
 end
 
 ---@return boolean

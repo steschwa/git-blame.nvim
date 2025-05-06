@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2025-05-06
+
+### 🚀 Features
+
+- Respect vim.o.winborder
+
+### 🐛 Bug Fixes
+
+- Clear ns if buf is valid
+- Check table keys
+
+### 🚜 Refactor
+
+- Remove deprecated apis
+
+### 📚 Documentation
+
+- Update README
+
+### ⚙️ Miscellaneous Tasks
+
+- Remove luarc
+- Remove duplicate tag prefix
+
 ## [1.0.3] - 2025-03-18
 
 ### ⚙️ Miscellaneous Tasks

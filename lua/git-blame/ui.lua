@@ -34,6 +34,8 @@ local WIN_AUGROUP = vim.api.nvim_create_augroup("git-blame.window", {
 	clear = true,
 })
 
+local WIN_NS = vim.api.nvim_create_namespace("git-blame.window")
+
 ---@param config git-blame.Config
 ---@return git-blame.Window
 function Window:new(config)
@@ -60,6 +62,7 @@ function Window:close()
 	vim.api.nvim_clear_autocmds({
 		group = WIN_AUGROUP,
 	})
+	vim.api.nvim_buf_clear_namespace(self.buf, WIN_NS, 0, -1)
 end
 
 ---@return boolean
@@ -99,7 +102,7 @@ function Window:open(blame)
 			local col_end = col_start + vim.api.nvim_strwidth(part.text)
 
 			if part.hl then
-				vim.api.nvim_buf_add_highlight(self.buf, -1, part.hl, row - 1, col_start, col_end)
+				vim.hl.range(self.buf, WIN_NS, part.hl, { row - 1, col_start }, { row - 1, col_end })
 			end
 
 			col_start = col_end

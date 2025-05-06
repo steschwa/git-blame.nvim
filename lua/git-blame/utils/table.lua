@@ -4,8 +4,8 @@ local Table = {}
 ---@param key string
 ---@return boolean
 function Table.has_key(table, key)
-	for _, value in pairs(table) do
-		if value == key then
+	for k in pairs(table) do
+		if k == key then
 			return true
 		end
 	end

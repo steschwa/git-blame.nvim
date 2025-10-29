@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2025-10-29
+
+### 🚀 Features
+
+- Validate setup options
+- Allow overriding window options
+
+### 🚜 Refactor
+
+- Config instance
+
+### ⚙️ Miscellaneous Tasks
+
+- Remove unused utils
+
 ## [1.1.0] - 2025-05-06
 
 ### 🚀 Features

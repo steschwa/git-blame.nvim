@@ -25,10 +25,7 @@ end
 ---@field config git-blame.Config
 ---@field win integer
 ---@field buf integer
-local Window = {
-	win = -1,
-	buf = -1,
-}
+local Window = {}
 
 local WIN_AUGROUP = vim.api.nvim_create_augroup("git-blame.window", {
 	clear = true,
@@ -39,8 +36,11 @@ local WIN_NS = vim.api.nvim_create_namespace("git-blame.window")
 ---@param config git-blame.Config
 ---@return git-blame.Window
 function Window:new(config)
+	---@type git-blame.Window
 	local o = {
 		config = config,
+		win = -1,
+		buf = -1,
 	}
 
 	return setmetatable(o, { __index = Window })

@@ -1,13 +1,7 @@
 local Window = require("git-blame.ui")
 local Git = require("git-blame.git")
+local Config = require("git-blame.config")
 local TableUtils = require("git-blame.utils.table")
-
----@class git-blame.WinConfig
----@field border string|string[]|nil
-
----@class git-blame.Config
----@field lines git-blame.Provider[][]
----@field window git-blame.WinConfig
 
 ---@class git-blame.Instance
 ---@field config git-blame.Config
@@ -34,9 +28,9 @@ function M.create_config(opts)
 	return config
 end
 
----@param opts git-blame.Config
+---@param opts git-blame.SetupOpts
 function M.setup(opts)
-	M.config = M.create_config(opts)
+	M.config = Config:create(opts)
 	M.win = Window:new(M.config)
 
 	vim.api.nvim_create_user_command("GitBlameLine", function()

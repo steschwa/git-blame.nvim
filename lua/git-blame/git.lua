@@ -58,14 +58,13 @@ local function parse_blame_output(output)
 	end
 
 	---@type git-blame.BlameInfo
-	local blame = {
+	return {
 		sha = sha,
 		author = author,
 		author_email = author_email,
 		timestamp = timestamp,
 		message = message,
 	}
-	return blame
 end
 
 local Git = {}

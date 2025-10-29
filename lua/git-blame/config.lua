@@ -21,10 +21,15 @@ local Config = {}
 function Config:create(opts)
 	validate_setup_opts(opts)
 
+	---@type vim.api.keyset.win_config
+	local default_window = {
+		style = "minimal",
+	}
+
 	---@type git-blame.Config
 	local c = {
 		lines = opts.lines,
-		window = opts.window or {},
+		window = vim.tbl_deep_extend("keep", opts.window or {}, default_window),
 	}
 
 	return setmetatable(c, { __index = Config })

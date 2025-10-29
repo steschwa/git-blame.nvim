@@ -116,14 +116,16 @@ function Window:open(blame)
 
 	local cursor = vim.api.nvim_win_get_cursor(0)
 
-	self.win = vim.api.nvim_open_win(self.buf, false, {
-		relative = "win",
-		bufpos = { cursor[1] - 1, cursor[2] },
-		width = line_width,
-		height = #rendered_lines,
-		style = "minimal",
-		border = self.config.window.border,
-	})
+	self.win = vim.api.nvim_open_win(
+		self.buf,
+		false,
+		vim.tbl_deep_extend("keep", {
+			relative = "win",
+			bufpos = { cursor[1] - 1, cursor[2] },
+			width = line_width,
+			height = #rendered_lines,
+		}, self.config.window)
+	)
 
 	vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
 		group = WIN_AUGROUP,

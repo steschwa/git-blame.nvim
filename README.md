@@ -4,132 +4,98 @@ A Neovim plugin that displays Git blame information for the current line in a fl
 
 ![Git blame in a floating window in Neovim](./assets/preview.png)
 
-## Features
-
-- Displays Git blame information in a floating window.
-- Highly customizable rendering of blame information through provider functions.
-
 ## Installation
 
-To install `git-blame.nvim`, you can use your preferred plugin manager. For example, using `lazy.nvim`:
+Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ```lua
-return {
+{
     "steschwa/git-blame.nvim",
+    keys = {
+        { "gb", "<cmd>GitBlameLine<cr>", desc = "Git blame current line" }
+    },
     opts = {
-        -- see below for the full configuration reference
+        -- your configuration here
     }
 }
 ```
 
 ## Configuration
 
-The plugin allows for extensive customization of how the blame output is displayed.
-You can define your own provider functions that dictate what information to show and how to format it.
+Customize the blame output by defining **provider functions** that format the information.
 
-The configuration has a `lines` field, which is a list of rows.
-Each row consists of `n` provider functions (of type `git-blame.Provider`) that receive a `git-blame.BlameInfo` object as their only parameter and return a `git-blame.Part`.
-A `git-blame.Part` is a table that contains the text to display and an optional highlight group.
-See [Example Configuration](#example-configuration) for a more practical explanation.
-
-<details>
-<summary>Types</summary>
-
-```lua
----@alias git-blame.Provider fun(blame: git-blame.BlameInfo): git-blame.Part
-
----@class git-blame.BlameInfo
----@field sha string
----@field author string
----@field author_email string
----@field timestamp integer -- unix timestamp in seconds
----@field message string
-
----@class git-blame.Part
----@field text string
----@field hl string?
-```
-
-</details>
-
-<details>
-<summary>Default Configuration</summary>
-
-These values are used by default if not overridden by you.
+### Setup Structure
 
 ```lua
 {
-    lines = {},
-    window = {
-        -- used for `vim.api.nvim_open_win()`
-        border = "single"
-    }
+    lines = {},   -- List of rows, each containing provider functions
+    window = {}   -- Window options (passed to vim.api.nvim_open_win)
 }
 ```
 
-</details>
+**Types:**
 
-### Example Configuration
+- `git-blame.Provider`: `fun(blame: git-blame.BlameInfo): git-blame.Part`
+- `git-blame.BlameInfo`: `{ sha, author, author_email, timestamp, message }`
+- `git-blame.Part`: `{ text: string, hl?: string }`
 
-Here is an example of how to configure the plugin with custom provider functions:
+### Example
 
 ```lua
-local provider_sha = function(blame)
-    local formatted_sha = blame.sha:sub(1, 10)
-    -- reuse highlight groups (e.g. Comment)
-    return { text = string.format("%s  "), hl = "Comment" }
-end
-
-local provider_time = function(blame)
-    -- see `man strftime` for a list of format placeholders
-    local formatted_time = vim.fn.strftime("%F %R", blame.timestamp)
-    return { text = formatted_time, hl = "GitBlameTime" }
-end
-
-local provider_author = function(blame)
-    return { text = string.format("Author: %s", blame.author), hl = "GitBlameAuthor" }
-end
-
-local provider_message = function(blame)
-    return { text = blame.message, hl = "GitBlameMessage" }
-end
-
-return {
+{
     "steschwa/git-blame.nvim",
     keys = {
-        { "gb", "<cmd>GitBlameLine<cr>" }
+        { "gb", "<cmd>GitBlameLine<cr>", desc = "Git blame current line" }
     },
     opts = {
         lines = {
-            { provider_sha, provider_time},
-            { provider_author },
+            {
+                function(blame)
+                    return { text = blame.sha:sub(1, 7) .. "  ", hl = "Comment" }
+                end,
+                function(blame)
+                    return { text = vim.fn.strftime("%Y-%m-%d", blame.timestamp) }
+                end,
+            },
+            {
+                function(blame)
+                    return { text = blame.author, hl = "Bold" }
+                end,
+            },
             {}, -- empty line
-            { provider_message },
+            {
+                function(blame)
+                    return { text = blame.message }
+                end,
+            },
+        },
+        window = {
+            border = "rounded",
         }
     }
 }
 ```
 
-This produces the output of the above screenshot.
+This produces a floating window showing:
+```
+abc1234  2025-01-15
+John Doe
+
+feat: add new feature
+```
 
 > [!NOTE]  
-> This plugin does not define any highlight groups by itself.  
-> Make sure you create them on demand:
->
+> The plugin does not define custom highlight groups. Create them as needed:
 > ```lua
-> vim.api.nvim_set_hl(0, "GitBlameTime", { link = "Label" })
+> vim.api.nvim_set_hl(0, "GitBlameAuthor", { link = "Bold" })
 > ```
-
-You can customize the output further by adding more rows or provider functions as needed, allowing for a flexible and tailored display of blame information.
 
 ## Usage
 
-- `:GitBlameLine`: Displays the Git blame information for the current line. If the blame window is already open, it will focus on it.
+**Command:** `:GitBlameLine`
 
-## Contributing
-
-Contributions are welcome! Please feel free to submit a pull request or open an issue for any bugs or feature requests.
+Shows blame info for the current line. If the window is already open, focuses it.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+MIT License. See [LICENSE](LICENSE) file for details.
